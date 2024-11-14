@@ -1,4 +1,4 @@
-// Acende LED RGB cor a cor com mistura de cores
+# Acende LED RGB cor a cor com mistura de cores
 from machine import Pin
 import utime
  
