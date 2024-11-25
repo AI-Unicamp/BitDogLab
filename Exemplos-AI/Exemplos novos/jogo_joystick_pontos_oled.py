@@ -1,3 +1,11 @@
+''' Este código é de um jogo onde aleatóriamente é impressa uma seta,
+para cima, para baixo, para esquerda ou para a direita.
+    Ele recebe o input do usuário pelo joystick, se acertar, 
+a matriz apresenta um cículo verde, se errar, um X vermelho.
+    Na tela OLED, apresenta o score de jogadas corretas, caso erre, 
+diminui suas vidas, que ao todo são 5.
+    Após acabar as vidas, o jogo recomeça em 3 segundos
+'''
 from machine import Pin, ADC, SoftI2C
 from ssd1306 import SSD1306_I2C
 from utime import sleep
@@ -8,6 +16,7 @@ import time
 # Configurações da matriz de LEDs
 NUM_LEDS = 25  # Total de LEDs na matriz 5x5
 PIN = 7  # Pino onde a matriz Neopixel está conectada
+LUMINOSIDADE = 75 # Nível de luminosidade dos LEDs
 np = neopixel.NeoPixel(Pin(PIN), NUM_LEDS)
 
 # Configuração do display OLED
@@ -57,7 +66,7 @@ def desenhar_seta(direcao):
         return
 
     for c in coords:
-        np[c] = (0, 0, 100)  # Cor azul para a seta
+        np[c] = (0, 0, LUMINOSIDADE)  # Cor azul para a seta
     np.write()
 
 def ler_joystick():
@@ -87,8 +96,9 @@ def feedback(correto):
     - Vermelho se a direção estiver errada
     """
 
+    apagar()
     if correto:
-        cor = (0, 100, 0)  # Verde
+        cor = (0, LUMINOSIDADE, 0)  # Verde
         coords: list(int) = [1, 2, 3, 5, 10, 15, 21, 22, 23, 19, 14, 9] # Círculo
         for c in coords:
             np[c] = cor
@@ -96,7 +106,7 @@ def feedback(correto):
         sleep(0.5)
         return
     
-    cor = (100, 0, 0)  # Vermelho
+    cor = (LUMINOSIDADE, 0, 0)  # Vermelho
     coords: list(int) = [0, 6, 12, 18, 24, 4, 8, 16, 20] # Xis
     for c in coords:
         np[c] = cor
@@ -129,7 +139,7 @@ while True:
                     display_message(f"Score: {score}")
                     
                     # Aumenta a dificuldade (diminui o tempo) a cada 5 acertos
-                    if not (score % 5):
+                    if not (score % 2):
                         time = max(0.5, time - 0.1)  # Reduz o tempo, mínimo de 0.5 segundos
                 else:
                     vidas -= 1  # Reduz as vidas em caso de erro

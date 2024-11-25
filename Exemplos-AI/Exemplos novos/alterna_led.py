@@ -1,3 +1,5 @@
+# Alterna cores no LED central entre azul e vermelho
+
 from machine import Pin
 from utime import sleep
 

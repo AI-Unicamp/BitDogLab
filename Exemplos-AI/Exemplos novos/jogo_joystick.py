@@ -1,7 +1,8 @@
-A matriz 5x5 será usada para desenhar setas que apontam para cima, baixo, esquerda, ou direita.
-O joystick é conectado a duas entradas analógicas da Raspberry Pi Pico (uma para o eixo X e outra para o eixo Y).
-O jogador precisa mover o joystick para a mesma direção indicada pela seta. Se acertar, a matriz de LEDs pisca em verde; se errar, pisca em vermelho.
-
+''' Este código é de um jogo onde aleatóriamente é impressa uma seta,
+    para cima, para baixo, para esquerda ou para a direita.
+    Ele recebe o input do usuário pelo joystick, se acertar, a matriz fica verde,
+     se errar, vermelha
+'''
 from machine import Pin, ADC
 import neopixel
 from utime import sleep
@@ -14,16 +15,16 @@ np = neopixel.NeoPixel(Pin(PIN), NUM_LEDS)
 
 # Mapeamento da matriz de LEDs com a origem no canto superior esquerdo
 LED_MATRIX = [
-    [0, 1, 2, 3, 4],
-    [5, 6, 7, 8, 9],
+    [0,   1,  2,  3,  4],
+    [5,   6,  7,  8,  9],
     [10, 11, 12, 13, 14],
     [15, 16, 17, 18, 19],
     [20, 21, 22, 23, 24]
 ]
 
 # Configuração do joystick (eixos analógicos)
-joystick_x = ADC(26)  # Pino do eixo X
-joystick_y = ADC(27)  # Pino do eixo Y
+joystick_x = ADC(27)  # Pino do eixo X
+joystick_y = ADC(26)  # Pino do eixo Y
 
 # Funções auxiliares
 def apagar():
@@ -38,18 +39,18 @@ def desenhar_seta(direcao):
     """
     apagar()
     if direcao == "cima":
-        coords = [12, 7, 17, 2, 22]  # Posição dos LEDs para a seta para cima
+        coords = [2, 7, 12, 17, 22, 6, 8, 10, 14]  # Seta para cima
     elif direcao == "baixo":
-        coords = [12, 17, 7, 22, 2]  # Seta para baixo
+        coords = [2, 7, 12, 17, 22, 10, 14, 16, 18]  # Seta para baixo
     elif direcao == "esquerda":
-        coords = [12, 11, 13, 6, 18]  # Seta para a esquerda
+        coords = [10, 11, 12, 13, 14, 2, 6, 16, 22]  # Seta para a esquerda
     elif direcao == "direita":
-        coords = [12, 13, 11, 18, 6]  # Seta para a direita
+        coords = [10, 11, 12, 13, 14, 2, 8, 18, 22]  # Seta para a direita
     else:
         return
 
     for c in coords:
-        np[c] = (0, 0, 255)  # Cor azul para a seta
+        np[c] = (0, 0, 100)  # Cor azul para a seta
     np.write()
 
 def ler_joystick():
@@ -61,13 +62,13 @@ def ler_joystick():
     y = joystick_y.read_u16()
 
     # Define os limiares para determinar a direção do joystick
-    if x < 20000:
+    if x < 15000:
         return "esquerda"
-    elif x > 45000:
+    elif x > 50000:
         return "direita"
-    elif y < 20000:
+    elif y < 15000:
         return "cima"
-    elif y > 45000:
+    elif y > 50000:
         return "baixo"
     else:
         return "centro"
@@ -78,7 +79,7 @@ def feedback(correto):
     - Verde se a direção estiver correta
     - Vermelho se a direção estiver errada
     """
-    cor = (0, 255, 0) if correto else (255, 0, 0)
+    cor = (0, 100, 0) if correto else (100, 0, 0)  # Verde ou vermelho
     np.fill(cor)
     np.write()
     sleep(0.5)
