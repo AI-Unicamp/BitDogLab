@@ -1,3 +1,5 @@
+# Acende LED RGB principal na cor vermelha
+
 from machine import Pin
 
 # Configuração do GPIO para o canal vermelho do LED RGB

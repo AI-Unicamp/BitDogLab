@@ -1,3 +1,4 @@
+# Toca música "Brilha, Brilha, Estrelinha" com o buzzer passivo
 from machine import Pin, PWM
 import time
 

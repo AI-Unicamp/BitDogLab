@@ -1,15 +1,15 @@
-# programa funcional
+# Toca música "Brilha, Brilha, Estrelinha" com o buzzer passivo
 
 from machine import Pin, PWM
 import time
 
 # Conecte o alto-falante ou buzzer passivo ao pino GP4
-alto_falante = PWM(Pin(4))
+alto_falante = PWM(Pin(21))
 
 # Conecte o LED RGB aos pinos GP13, GP12 e GP14
-led_red = PWM(Pin(11))
+led_red = PWM(Pin(13))
 led_green = PWM(Pin(12))
-led_blue = PWM(Pin(13))
+led_blue = PWM(Pin(14))
 
 # Frequências das notas musicais
 notas = {

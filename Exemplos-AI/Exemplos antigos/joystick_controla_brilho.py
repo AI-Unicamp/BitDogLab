@@ -1,3 +1,5 @@
+# Controla Brilho do LED central com o joystick
+
 from machine import Pin, ADC, PWM
 import time
 

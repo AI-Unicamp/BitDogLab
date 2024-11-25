@@ -1,3 +1,6 @@
+''' Acende desenho de coração na matriz de LEDs, 
+    alternando com o LED central. 
+    Mostra mensagem "Hello, I Love You!" no display OLED'''
 from machine import Pin, SoftI2C
 import neopixel
 import time
