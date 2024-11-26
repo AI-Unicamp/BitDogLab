@@ -18,8 +18,8 @@ LED_MATRIX = [
 ]
 
 # Configuração dos botões
-botao_a = Pin(11, Pin.IN, Pin.PULL_UP)  # Botão A (com pull-up interno)
-botao_b = Pin(12, Pin.IN, Pin.PULL_UP)  # Botão B (com pull-up interno)
+botao_a = Pin(5, Pin.IN, Pin.PULL_UP)  # Botão A (com pull-up interno)
+botao_b = Pin(6, Pin.IN, Pin.PULL_UP)  # Botão B (com pull-up interno)
 
 # Configuração da tela OLED
 i2c = I2C(0, scl=Pin(22), sda=Pin(21))  # I2C nos pinos 22 (SCL) e 21 (SDA)

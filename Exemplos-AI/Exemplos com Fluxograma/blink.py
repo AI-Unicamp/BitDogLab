@@ -1,3 +1,4 @@
+# Pisca LED central na cor azul a cada 1 segundo
 from machine import Pin
 import utime
 

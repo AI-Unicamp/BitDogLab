@@ -14,7 +14,6 @@
     Quando todos os 25 LEDs forem acesos, o índice é reiniciado, e todos os LEDs são apagados antes de continuar.
 '''
 
-
 from machine import Pin
 import neopixel
 from utime import sleep

@@ -154,10 +154,12 @@ while True:
     apagar()
     display_message("Fim de Jogo!")
     print(f"Score final: {score}")
+    display_message(f"Score final: {score}")
     sleep(2)
 
     # Reinicia o jogo
     apagar()
     display_message("Novo jogo em 3s...")
     sleep(3)
+
 

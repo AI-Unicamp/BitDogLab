@@ -1,4 +1,7 @@
-
+'''
+Se aperta o botão A, acende o LED central na cor amarela,
+se for o botão B, na cor azul e se for os dois, na cor verde 
+'''
 from machine import Pin
 import utime
 
@@ -18,16 +21,16 @@ while True:
     # Verifica a condição para acender o LED nas cores desejadas
     if estado_a == 0 and estado_b == 0:      # Ambos os botões pressionados
         led_vermelho.value(0)
-        led_verde.value(0)
-        led_azul.value(1)                    # Acende o LED azul
+        led_verde.value(1)                   # Acende o LED verde
+        led_azul.value(0)                    
     elif estado_a == 0:                      # Apenas o botão A pressionado
         led_vermelho.value(1)
-        led_verde.value(1)
         led_azul.value(0)                    # Acende o LED amarelo (vermelho + verde)
+        led_verde.value(1)
     elif estado_b == 0:                      # Apenas o botão B pressionado
         led_vermelho.value(0)
-        led_verde.value(1)
-        led_azul.value(0)                    # Acende o LED verde
+        led_verde.value(0)
+        led_azul.value(1)                    # Acende o LED azul
     else:
         led_vermelho.value(0)
         led_verde.value(0)

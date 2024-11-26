@@ -1,3 +1,4 @@
+# Troca entre 7 cores: Branco, Vermelho, Amarelo, Verde, Ciano, Azul, Magenta
 from machine import Pin
 import utime
 

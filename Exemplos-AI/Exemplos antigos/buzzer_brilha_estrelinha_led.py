@@ -7,7 +7,7 @@ import time
 alto_falante = PWM(Pin(21))
 
 # Conecte o LED RGB aos pinos GP13, GP12 e GP14
-led_red = PWM(Pin(13))
+led_red = PWM(Pin(12))
 led_green = PWM(Pin(12))
 led_blue = PWM(Pin(14))
 

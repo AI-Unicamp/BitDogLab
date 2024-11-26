@@ -1,5 +1,4 @@
 # Acende o LED RGB principal transitando entre as cores
-
 from machine import Pin, PWM
 import utime
 

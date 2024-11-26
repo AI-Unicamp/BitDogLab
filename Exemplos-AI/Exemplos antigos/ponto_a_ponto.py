@@ -1,3 +1,4 @@
+# Programa que simula um pulso cárdiaco no buzzer
 from machine import PWM, Pin
 import neopixel
 import time
@@ -18,13 +19,13 @@ def beep(duration=0.1):
     buzzer.duty_u16(0)  # Desliga o buzzer
 
 def dim_leds(led_sequence, current_index):
-    # Define o fator de diminuição de intensidade baseado no índice atual do LED
-    dim_factor = 255 // (len(led_sequence) - current_index)
-    for idx, led in enumerate(led_sequence):
-        if idx < current_index:
-            r, g, b = np[led]
-            r = max(r - dim_factor, 0)
-            np[led] = (r, g, b)
+    dim_factor = 255 // len(led_sequence)
+    for idx in range(current_index):
+        r, g, b = np[led_sequence[idx]]
+        r = max(r - dim_factor, 0)
+        g = max(g - dim_factor, 0)
+        b = max(b - dim_factor, 0)
+        np[led_sequence[idx]] = (r, g, b)
 
 def heartbeat_effect():
     # Limpa todos os LEDs
@@ -34,7 +35,7 @@ def heartbeat_effect():
     
     # Sequência de LEDs para simular o pulso cardíaco
     sequence = [14, 6, 12, 21, 10]
-    delay_time = 1 / len(sequence)
+    delay_time = 0.2  # Ajuste para a duração do efeito
     
     for idx, led in enumerate(sequence):
         np[led] = (255, 0, 0)  # Acende o LED vermelho
@@ -50,6 +51,7 @@ def heartbeat_effect():
     # Toca o beep no buzzer
     beep()
 
-# Teste
-heartbeat_effect()
-
+# Loop infinito para repetir o efeito
+while True:
+    heartbeat_effect()
+    time.sleep(1)  # Tempo entre os batimentos
